@@ -55,7 +55,7 @@ const SignInScreen = ({navigation}) => {
     return (
         <View style={styles.container} >
             <View style={styles.header}>
-                <Text style={styles.text_header}>Wellcome!</Text>
+                <Text style={styles.text_header}>Register Now!</Text>
             </View>
             <Animatable.View style={styles.footer}
                 animation="fadeInUpBig">
@@ -95,6 +95,38 @@ const SignInScreen = ({navigation}) => {
                         autoCapitalize="none"
                         onChangeText = {(val)=> handlePasswordChange(val)}
                     />
+
+                    <TouchableOpacity
+                        onPress = {updateSecureTextEntry}>
+                            {data.secureTextEntry ?
+                    <Feather
+                        name="eye-off"
+                        color="grey"
+                        size={30}
+                    />
+                    :
+                    <Feather
+                        name="eye"
+                        color="grey"
+                        size={30}
+                    />
+                            }
+                    </TouchableOpacity>
+                </View>
+                <Text style={[styles.text_footer, { marginTop: 35 }]}>Confirm PassWord</Text>
+                <View style={styles.action}>
+                    <FontAwesome
+                        name="lock"
+                        color="#05375a"
+                        size={30} />
+                    <TextInput
+                        placeholder="Confirm PassWord!"
+                        secureTextEntry={data.secureTextEntry ? true : false}
+                        style={styles.textInput}
+                        autoCapitalize="none"
+                        onChangeText = {(val)=> handlePasswordChange(val)}
+                    />
+
                     <TouchableOpacity
                         onPress = {updateSecureTextEntry}>
                             {data.secureTextEntry ?
@@ -117,11 +149,11 @@ const SignInScreen = ({navigation}) => {
                         colors={['#08d4c4','#01ab9d']}
                         style = {styles.signIn}
                         >
-                            <Text style = {styles.textSign}>Sign In</Text>
+                            <Text style = {styles.textSign}>Sign Up</Text>
                         </LinearGradient>
 
                         <TouchableOpacity
-                        onPress = {() => navigation.navigate('SignUpScreen')}
+                        onPress = {() => navigation.goBack()}
                         style = {[styles.signIn,{
                             borderColor:'#009387',
                             borderWidth:1,
@@ -130,7 +162,7 @@ const SignInScreen = ({navigation}) => {
                         >
                             <Text style = {[styles.textSign,{
                                 color:'#009387'
-                            }]}>Sign Up</Text>
+                            }]}>Sign In</Text>
                         </TouchableOpacity>
                 </View>
             </Animatable.View>
