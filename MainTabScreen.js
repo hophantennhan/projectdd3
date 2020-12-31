@@ -12,20 +12,20 @@ import ProfileScreen from './ProfileScreen';
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
-
+const ExploreStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-const MainTabScreen = () => {
-  return(
-    <Tab.Navigator
-    initialRouteName="Home"
+const MainTabScreen = () => (
+  <Tab.Navigator
+    initialRouteName="Trang Chủ"
     activeColor="#fff"
   >
     <Tab.Screen
-      name="Home"
+      name="Trang Chủ"
       component={HomeStackScreen}
       options={{
-        tabBarLabel: 'Home',
+        tabBarLabel: 'Trang Chủ',
         tabBarColor: '#009387',
         tabBarIcon: ({ color }) => (
           <Icon name="ios-home" color={color} size={26} />
@@ -36,38 +36,37 @@ const MainTabScreen = () => {
       name="Notifications"
       component={DetailsStackScreen}
       options={{
-        tabBarLabel: 'Updates',
+        tabBarLabel: 'Tạo Chuyến Đi',
         tabBarColor: '#1f65ff',
         tabBarIcon: ({ color }) => (
           <Icon name="ios-notifications" color={color} size={26} />
         ),
       }}
     />
-    {/* <Tab.Screen
+    <Tab.Screen
       name="Profile"
-      component={ProfileScreen}
+      component={ProfileStackScreen}
       options={{
         tabBarLabel: 'Profile',
         tabBarColor: '#694fad',
         tabBarIcon: ({ color }) => (
-          <Icon name="person" color={color} size={26} />
+          <Icon name="aperture" color={color} size={26} />
         ),
       }}
     />
     <Tab.Screen
       name="Explore"
-      component={ExploreScreen}
+      component={ExploreStackcreen}
       options={{
-        tabBarLabel: 'Explore',
+        tabBarLabel: 'Tham Gia',
         tabBarColor: '#d02860',
         tabBarIcon: ({ color }) => (
-          <Icon name="aperture" color={color} size={26} />
+          <Icon name="person" color={color} size={26} />
         ),
       }}
-    /> */}
+    />
   </Tab.Navigator>
-  )
-    };
+);
 
 export default MainTabScreen;
 
@@ -106,4 +105,42 @@ const DetailsStackScreen = ({ navigation }) => (
       )
     }} />
   </DetailsStack.Navigator>
+);
+const ExploreStackcreen = ({ navigation }) => (
+  <ExploreStack.Navigator screenOptions={{
+    headerStyle: {
+      backgroundColor: '#d02860',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <ExploreStack.Screen name="Home" component={ExploreScreen} options={{
+      title: 'Tham gia chuyến đi',
+      headerLeft: () => (
+        <Icon.Button name="ios-menu" size={25} backgroundColor="#d02860" onPress={() => navigation.openDrawer()}></Icon.Button>
+      )
+    }} />
+  </ExploreStack.Navigator>
+  
+);
+const ProfileStackScreen = ({ navigation }) => (
+  <ProfileStack.Navigator screenOptions={{
+    headerStyle: {
+      backgroundColor: '#694fad',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <ProfileStack.Screen name="Home" component={ProfileScreen} options={{
+      title: 'Tham gia chuyến đi',
+      headerLeft: () => (
+        <Icon.Button name="ios-menu" size={25} backgroundColor="#694fad" onPress={() => navigation.openDrawer()}></Icon.Button>
+      )
+    }} />
+  </ProfileStack.Navigator>
+  
 );

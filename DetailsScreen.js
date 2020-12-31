@@ -75,7 +75,7 @@ export default class DetailsScreen extends React.Component {
         })
         .then(() => alert('Success'));
     } else {
-      alert('Vui lòng nhập đầy đủ các trường!');
+      alert('Vui l�ng nh?p d?y d? c�c tru?ng!');
     }
   };
 
@@ -116,10 +116,10 @@ export default class DetailsScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.centerView}>
-          <Text style={styles.tieude}>THÊM TOUR</Text>
+          <Text style={styles.tieude}>TH�M TOUR</Text>
         </View>
         <View style={styles.view1}>
-          <Text> Tên Tour : </Text>
+          <Text> T�n Tour : </Text>
         </View>
         <View>
           <TextInput
@@ -128,7 +128,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> Số Lượng Người : </Text>
+          <Text> S? Lu?ng Ngu?i : </Text>
         </View>
         <View>
           <TextInput
@@ -137,7 +137,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> Giá Tour : </Text>
+          <Text> Gi� Tour : </Text>
         </View>
         <View>
           <TextInput
@@ -146,7 +146,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> Lộ Trình : </Text>
+          <Text> L? Tr�nh : </Text>
         </View>
         <View>
           <TextInput
@@ -155,7 +155,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> Thời Gian : </Text>
+          <Text> Th?i Gian : </Text>
         </View>
         <View>
           <TextInput
@@ -164,7 +164,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> Phương Tiện : </Text>
+          <Text> Phuong Ti?n : </Text>
         </View>
         <View>
           <TextInput
@@ -173,7 +173,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> Chọn Ảnh : </Text>
+          <Text> Ch?n ?nh : </Text>
         </View>
         <TouchableOpacity style={styles.view1} onPress={this.selectFile}>
           <Image
@@ -194,7 +194,7 @@ export default class DetailsScreen extends React.Component {
           <View style={styles.view3}>
             {/* style={styles.button} onPress={ () => this.ThemPhong()} */}
             <TouchableOpacity onPress = { () => this.ThemTour()}>
-              <Text>Thêm Tour</Text>
+              <Text>Th�m Tour</Text>
             </TouchableOpacity>
           </View>
         </View>
