@@ -15,8 +15,9 @@ const DetailsStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
-const MainTabScreen = () => (
-  <Tab.Navigator
+const MainTabScreen = () => {
+  return(
+    <Tab.Navigator
     initialRouteName="Home"
     activeColor="#fff"
   >
@@ -42,7 +43,7 @@ const MainTabScreen = () => (
         ),
       }}
     />
-    <Tab.Screen
+    {/* <Tab.Screen
       name="Profile"
       component={ProfileScreen}
       options={{
@@ -63,9 +64,10 @@ const MainTabScreen = () => (
           <Icon name="aperture" color={color} size={26} />
         ),
       }}
-    />
+    /> */}
   </Tab.Navigator>
-);
+  )
+    };
 
 export default MainTabScreen;
 

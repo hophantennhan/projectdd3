@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "892969001134",
+    "project_id": "qltour-b4d37",
+    "storage_bucket": "qltour-b4d37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892969001134:android:2d917673fa2142ddb0cd3f",
+        "android_client_info": {
+          "package_name": "com.doandd3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892969001134-opdkbevkqechfvm0ob6fq9nspeir2tff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.doandd3",
+            "certificate_hash": "0c978abf552cf70cff2e30efdbc9e7573018af54"
+          }
+        },
+        {
+          "client_id": "892969001134-vrls7tk8qj4tddqhitb2l4g867o1s3eq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdltTcwISR0GsAKrQu_5Zv3rTQaDTRTkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892969001134-vrls7tk8qj4tddqhitb2l4g867o1s3eq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,7 +14,7 @@ export default class AppNavigation extends Component{
             <NavigationContainer>
                 <Stack.Navigator
                 screenOptions = {{headerShown: false}}
-                inittialouteName = {'SplashScreen'}>
+                inittialouteName = {'MainTabScreen'}>
                     <Stack.Screen name = "SplashScreen" component = {SplashScreen}/>
                     <Stack.Screen name = "SignInScreen" component = {SignInScreen}/>
                     <Stack.Screen name = "SignUpScreen" component = {SignUpScreen}/>
