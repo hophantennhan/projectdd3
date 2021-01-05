@@ -25,7 +25,7 @@ const MainTabScreen = () => (
       name="Trang Chủ"
       component={HomeStackScreen}
       options={{
-        tabBarLabel: 'Trang Chủ',
+        tabBarLabel: 'Thống Kê Danh Sách Tour',
         tabBarColor: '#009387',
         tabBarIcon: ({ color }) => (
           <Icon name="ios-home" color={color} size={26} />
@@ -47,7 +47,7 @@ const MainTabScreen = () => (
       name="Profile"
       component={ProfileStackScreen}
       options={{
-        tabBarLabel: 'Profile',
+        tabBarLabel: 'Danh Sách Tour',
         tabBarColor: '#694fad',
         tabBarIcon: ({ color }) => (
           <Icon name="aperture" color={color} size={26} />

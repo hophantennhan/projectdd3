@@ -13,58 +13,46 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import database from '@react-native-firebase/database';
 FontAwesome.loadFont();
 export default class SignUpScreen extends React.Component {
-
-    // const [data, setData] = React.useState({
-    //     email: '',
-    //     password: '',
-    //     check_textInputChange: false,
-    //     secureTextEntry: true
-    // });
     constructor(props){
         super(props);
         this.state = {
             email:'',
             password:'',
+            repassword:'',
             check_textInputChange: false,
             secureTextEntry: true
         }
     }
+    
+    ThemTaiKhoan = async () => {
+        const ref = database().ref('QuanLyTour/TaiKhoan/' + this.state.email);
+        ref
+          .set({
+            email: this.state.email,
+            password: this.state.password,
+          })
+          .then(() => console.log('Data seted'));
+      };
+
 
     textInputChange = (val) =>{
         if( val.length !== 0){
-            // setData({
-            //     ...data,
-            //     email:val,
-            //     check_textInputChange:true
-            // });
+         
             this.setState({email:val})
             this.setState({check_textInputChange:true})
         }
-        else{
-            // setData({
-            //     ...data,
-            //     email:val,
-            //     check_textInputChange:false
-            // });
+        else{     
             this.setState({email:val})
             this.setState({check_textInputChange:false})
-        }
-        
+        }    
     }
      handlePasswordChange = (val) =>{
-        // setData({
-        //     ...data,
-        //     password:val
-        // });
         this.setState({password:val})
     }
     updateSecureTextEntry = () =>{
-        // setData({
-        //     ...data,
-        //     secureTextEntry:!data.secureTextEntry
-        // }); 
         this.setState({secureTextEntry:!secureTextEntry})
     }
     
@@ -105,30 +93,14 @@ export default class SignUpScreen extends React.Component {
                             name="lock"
                             color="#05375a"
                             size={30} />
-                        <TextInput
-                            placeholder="Your PassWord!"
-                            secureTextEntry={this.s.secureTextEntry ? true : false}
+                     <TextInput
+                            placeholder="Enter your password!"
+                            secureTextEntry={this.state.secureTextEntry ? true : false}
                             style={styles.textInput}
                             autoCapitalize="none"
-                            onChangeText = {(val)=>this.setState({password:val})}
+                            onChangeText = {(password)=>this.setState({password:password})}
                         />
     
-                        <TouchableOpacity
-                            onPress = {this.updateSecureTextEntry}>
-                                {this.state.secureTextEntry ?
-                        <Feather
-                            name="eye-off"
-                            color="grey"
-                            size={30}
-                        />
-                        :
-                        <Feather
-                            name="eye"
-                            color="grey"
-                            size={30}
-                        />
-                                }
-                        </TouchableOpacity>
                     </View>
                     <Text style={[styles.text_footer, { marginTop: 35 }]}>Confirm PassWord</Text>
                     <View style={styles.action}>
@@ -144,22 +116,6 @@ export default class SignUpScreen extends React.Component {
                             onChangeText = {(val)=> this.handlePasswordChange(val)}
                         />
     
-                        <TouchableOpacity
-                            onPress = {this.updateSecureTextEntry}>
-                                {this.secureTextEntry ?
-                        <Feather
-                            name="eye-off"
-                            color="grey"
-                            size={30}
-                        />
-                        :
-                        <Feather
-                            name="eye"
-                            color="grey"
-                            size={30}
-                        />
-                                }
-                        </TouchableOpacity>
                     </View>
                     <View style = {styles.buton}>
                             <LinearGradient
@@ -167,8 +123,14 @@ export default class SignUpScreen extends React.Component {
                             style = {styles.signIn}
                             >
                                 <Text style = {styles.textSign}>Sign Up</Text>
+                                <TouchableOpacity
+                        style={styles.button} onPress={() => this.ThemTaiKhoan()}>
+                             
+                        </TouchableOpacity>
                             </LinearGradient>
-    
+
+                        
+
                             <TouchableOpacity
                             onPress = {() => this.props.navigation.goBack()}
                             style = {[styles.signIn,{
@@ -181,9 +143,11 @@ export default class SignUpScreen extends React.Component {
                                     color:'#009387'
                                 }]}>Sign In</Text>
                             </TouchableOpacity>
+                           
                     </View>
                 </Animatable.View>
             </View>
+            
         );
     }
 };
@@ -193,6 +157,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#009387'
+    },
+    centerView: {flexDirection: 'row', justifyContent: 'center'},
+    textInput: {
+      borderRadius: 20,
+      borderColor: '#000',
+      borderWidth: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     header: {
         flex: 1,
@@ -224,6 +197,15 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingBottom: 5
     },
+    button: {
+        borderRadius: 20,
+        borderColor: '#000',
+        borderWidth: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 15,
+      },
     textInput: {
         flex: 1,
         marginTop: Platform.OS === 'android' ? 0 : -12,
