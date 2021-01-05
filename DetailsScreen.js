@@ -73,9 +73,9 @@ export default class DetailsScreen extends React.Component {
           phuongTien: this.state.phuongTien,
           photo: this.state.photo,
         })
-        .then(() => alert('Success'));
+        .then(() => alert('ThÃªm tour thÃ nh cÃ´ng!!!'));
     } else {
-      alert('Vui lòng nh?p d?y d? các tru?ng!');
+      alert('Vui lÃ²ng nháº­p Ä‘áº§y Ä‘á»§ thÃ´ng tin!');
     }
   };
 
@@ -116,10 +116,10 @@ export default class DetailsScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.centerView}>
-          <Text style={styles.tieude}>THÊM TOUR</Text>
+          <Text style={styles.tieude}>THï¿½M TOUR</Text>
         </View>
         <View style={styles.view1}>
-          <Text> Tên Tour : </Text>
+          <Text> Tï¿½n Tour : </Text>
         </View>
         <View>
           <TextInput
@@ -137,7 +137,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> Giá Tour : </Text>
+          <Text> Giï¿½ Tour : </Text>
         </View>
         <View>
           <TextInput
@@ -146,7 +146,7 @@ export default class DetailsScreen extends React.Component {
           />
         </View>
         <View style={styles.view1}>
-          <Text> L? Trình : </Text>
+          <Text> L? Trï¿½nh : </Text>
         </View>
         <View>
           <TextInput
@@ -194,7 +194,7 @@ export default class DetailsScreen extends React.Component {
           <View style={styles.view3}>
             {/* style={styles.button} onPress={ () => this.ThemPhong()} */}
             <TouchableOpacity onPress = { () => this.ThemTour()}>
-              <Text>Thêm Tour</Text>
+              <Text>Thï¿½m Tour</Text>
             </TouchableOpacity>
           </View>
         </View>
