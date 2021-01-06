@@ -8,12 +8,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ExploreScreen from './ExploreScreen';
-import ProfileScreen from './ProfileScreen';
+// import ProfileScreen from './ProfileScreen';
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
-const ExploreStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
+// const ExploreStack = createStackNavigator();
+// const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () => (
@@ -43,7 +43,7 @@ const MainTabScreen = () => (
         ),
       }}
     />
-    <Tab.Screen
+    {/* <Tab.Screen
       name="Profile"
       component={ProfileStackScreen}
       options={{
@@ -53,8 +53,8 @@ const MainTabScreen = () => (
           <Icon name="aperture" color={color} size={26} />
         ),
       }}
-    />
-    <Tab.Screen
+    /> */}
+    {/* <Tab.Screen
       name="Explore"
       component={ExploreStackcreen}
       options={{
@@ -64,7 +64,7 @@ const MainTabScreen = () => (
           <Icon name="person" color={color} size={26} />
         ),
       }}
-    />
+    /> */}
   </Tab.Navigator>
 );
 
@@ -99,48 +99,48 @@ const DetailsStackScreen = ({ navigation }) => (
       fontWeight: 'bold'
     }
   }}>
-    <DetailsStack.Screen name="Details" component={DetailsScreen} options={{
+    <DetailsStack.Screen name="Thêm chuyến đi" component={DetailsScreen} options={{
       headerLeft: () => (
         <Icon.Button name="ios-menu" size={25} backgroundColor="#1f65ff" onPress={() => navigation.openDrawer()}></Icon.Button>
       )
     }} />
   </DetailsStack.Navigator>
 );
-const ExploreStackcreen = ({ navigation }) => (
-  <ExploreStack.Navigator screenOptions={{
-    headerStyle: {
-      backgroundColor: '#d02860',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }}>
-    <ExploreStack.Screen name="Home" component={ExploreScreen} options={{
-      title: 'Tham gia chuyến đi',
-      headerLeft: () => (
-        <Icon.Button name="ios-menu" size={25} backgroundColor="#d02860" onPress={() => navigation.openDrawer()}></Icon.Button>
-      )
-    }} />
-  </ExploreStack.Navigator>
+// const ExploreStackcreen = ({ navigation }) => (
+//   <ExploreStack.Navigator screenOptions={{
+//     headerStyle: {
+//       backgroundColor: '#d02860',
+//     },
+//     headerTintColor: '#fff',
+//     headerTitleStyle: {
+//       fontWeight: 'bold'
+//     }
+//   }}>
+//     <ExploreStack.Screen name="Home" component={ExploreScreen} options={{
+//       title: 'Tham gia chuyến đi',
+//       headerLeft: () => (
+//         <Icon.Button name="ios-menu" size={25} backgroundColor="#d02860" onPress={() => navigation.openDrawer()}></Icon.Button>
+//       )
+//     }} />
+//   </ExploreStack.Navigator>
   
-);
-const ProfileStackScreen = ({ navigation }) => (
-  <ProfileStack.Navigator screenOptions={{
-    headerStyle: {
-      backgroundColor: '#694fad',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }}>
-    <ProfileStack.Screen name="Home" component={ProfileScreen} options={{
-      title: 'Tham gia chuyến đi',
-      headerLeft: () => (
-        <Icon.Button name="ios-menu" size={25} backgroundColor="#694fad" onPress={() => navigation.openDrawer()}></Icon.Button>
-      )
-    }} />
-  </ProfileStack.Navigator>
+// );
+// const ProfileStackScreen = ({ navigation }) => (
+//   <ProfileStack.Navigator screenOptions={{
+//     headerStyle: {
+//       backgroundColor: '#694fad',
+//     },
+//     headerTintColor: '#fff',
+//     headerTitleStyle: {
+//       fontWeight: 'bold'
+//     }
+//   }}>
+//     <ProfileStack.Screen name="Home" component={ProfileScreen} options={{
+//       title: 'Tham gia chuyến đi',
+//       headerLeft: () => (
+//         <Icon.Button name="ios-menu" size={25} backgroundColor="#694fad" onPress={() => navigation.openDrawer()}></Icon.Button>
+//       )
+//     }} />
+//   </ProfileStack.Navigator>
   
-);
+// );

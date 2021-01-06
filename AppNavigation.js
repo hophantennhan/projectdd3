@@ -6,6 +6,10 @@ import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import HomeScreen from './HomeScreen';
 import MainTabScreen from './MainTabScreen';
+import ProfileScreen from './ProfileScreen';
+import ExploreScreen from './ExploreScreen';
+import ThongTinTour from './ThongTinTour';
+import DanhSachHK from './DanhSachHK';
 const Stack = createStackNavigator();
 
 export default class AppNavigation extends Component{
@@ -19,6 +23,10 @@ export default class AppNavigation extends Component{
                     <Stack.Screen name = "SignInScreen" component = {SignInScreen}/>
                     <Stack.Screen name = "SignUpScreen" component = {SignUpScreen}/>
                     <Stack.Screen name = "HomeScreen" component = {HomeScreen}/>
+                    <Stack.Screen name = "ProfileScreen" component = {ProfileScreen}/>
+                    <Stack.Screen name = "ThongTinTour" component = {ThongTinTour}/>
+                    <Stack.Screen name = "ExploreScreen" component = {ExploreScreen}/>
+                    <Stack.Screen name = "DanhSachHK" component = {DanhSachHK}/>
                     <Stack.Screen name = "MainTabScreen" component = {MainTabScreen}/>
                 </Stack.Navigator>
             </NavigationContainer>

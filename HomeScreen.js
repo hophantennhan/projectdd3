@@ -1,50 +1,77 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, StatusBar, SafeAreaView, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-
+import database from '@react-native-firebase/database';
+import Swipeout from 'react-native-swipeout';
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      DATA: [
-        {
-          id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-          title: "Hà nội",
-          lichtrinh: "Hà nội -  Sài Gòn",
-          thoigian: "10h-22h",
-          image: "https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.0-9/131986212_1077022696074786_5327668342529318836_o.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_ohc=vPT9o-2ysC4AX_rU4bF&_nc_ht=scontent.fsgn2-4.fna&oh=c6f59b6996394003e1984f95ca21af11&oe=60118766",
-        },
-        {
-          id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-          title: "Đà nẵng",
-          lichtrinh: "Hà nội -  Sài Gòn",
-          thoigian: "10h-22h",
-          image: "https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.0-9/131986212_1077022696074786_5327668342529318836_o.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_ohc=vPT9o-2ysC4AX_rU4bF&_nc_ht=scontent.fsgn2-4.fna&oh=c6f59b6996394003e1984f95ca21af11&oe=60118766",
-        },
-        {
-          id: "58694a0f-3da1-471f-bd96-145571e29d72",
-          title: "Hồ chí minh",
-          lichtrinh: "Hà nội -  Sài Gòn",
-          thoigian: "10h-22h",
-          image: "https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.0-9/131986212_1077022696074786_5327668342529318836_o.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_ohc=vPT9o-2ysC4AX_rU4bF&_nc_ht=scontent.fsgn2-4.fna&oh=c6f59b6996394003e1984f95ca21af11&oe=60118766",
-        },
-      ]
+      DATA: [],
+
     }
 
   }
+
+  componentDidMount() {
+    this._getAllList();
+  }
+  _getAllList = () => {
+    const ref = database().ref('/QuanLyTour/Tour/');
+    ref.on('value', (snapshot) => {
+      const DATA = [];
+      snapshot.forEach((e) => {
+        DATA.push(e._snapshot.value);
+      });
+      this.setState({ DATA });
+      // this.setState({temp: DATA});
+      // console.log('A ' + this.state.temp);
+    });
+  };
+
+  _renderSearchBar = () => {
+    return (
+      <Searchbar
+        placeholder={'Search Here...'}
+        value={this.state.keySearch}
+        editable={true}
+        onChangeText={this._updateSearch}
+      />
+    );
+  };
+
   Item = ({ item, index }) => (
-    <TouchableOpacity onPress={() => alert(index)} style={styles.itembackg}>
-      <Image style={styles.image} source={{ uri: item.image }}></Image>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate("ThongTinTour", { tour: this.state.DATA[index] })}
+    onLongPress={() => this.props.navigation.navigate("ProfileScreen", { tour: this.state.DATA[index] })}
+    style={styles.itembackg}>
+      <Image style={styles.image} source={{ uri: item.photo }}></Image>
       <View style={styles.itemView}>
-        <Text style={styles.title}>Địa điểm :{item.title}</Text>
-        <Text style={styles.title}>Lịch trình:{item.lichtrinh}</Text>
-        <Text style={styles.title}>Thời gian:{item.thoigian}</Text>
+        <Text style={styles.title}>Địa điểm :{item.tenTour}</Text>
+        <Text style={styles.title}>Lịch trình:{item.phuongTien}</Text>
+        <Text style={styles.title}>Thời gian:{item.soLuongNguoi}</Text>
       </View>
-
-
     </TouchableOpacity>
+  
   );
+
   render() {
+const swipeSetting = {
+  autoClose: true,
+  onClose:(secId,rowId, direction) =>{
+
+  },
+  onOpen :(secId,rowId,direction)=>{
+
+  },
+  right:[{
+    onPress:()=>{
+
+    },
+    text:'Delete',type:'delete'
+  }],
+rowId:this.props.index
+};
+
     return (
       // <View style={styles.container}>
       //   <View style={styles.footer}>
@@ -55,14 +82,18 @@ export default class HomeScreen extends React.Component {
       //     />
       //   </View>
       // </View>
-      <SafeAreaView>
-        <FlatList
-          data={this.state.DATA}
-          renderItem={this.Item}
-          keyExtractor={(item) => item.id}
-        // extraData={selectedId}
-        />
-      </SafeAreaView>
+
+        <SafeAreaView>
+                <Swipeout{...swipeSetting}>
+          <FlatList
+            data={this.state.DATA}
+            renderItem={this.Item}
+            keyExtractor={(item) => item.id}
+          // extraData={selectedId}
+          />
+          </Swipeout>
+        </SafeAreaView>
+
     )
 
   }

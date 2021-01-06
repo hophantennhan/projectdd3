@@ -13,10 +13,12 @@ import * as ImagePicker from 'react-native-image-picker';
 import database from '@react-native-firebase/database';
 import storage from '@react-native-firebase/storage';
 
-export default class DetailsScreen extends React.Component {
+
+export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      DATA: this.props.route.params,
       tenTour: '',
       soLuongNguoi: '',
       giaTour: '',
@@ -26,7 +28,22 @@ export default class DetailsScreen extends React.Component {
       photo: '',
     };
   }
-  
+
+  componentDidMount() {
+    this._getParam();
+  }
+
+  _getParam = async () => {
+    await this.setState({ tenTour: this.state.DATA.tour.tenTour });
+    await this.setState({ soLuongNguoi: this.state.DATA.tour.soLuongNguoi });
+    await this.setState({ giaTour: this.state.DATA.tour.giaTour });
+    await this.setState({ loTrinh: this.state.DATA.tour.loTrinh });
+    await this.setState({ thoiGian: this.state.DATA.tour.thoiGian });
+    await this.setState({ phuongTien: this.state.DATA.tour.phuongTien });
+    await this.setState({ photo: this.state.DATA.tour.photo });
+    await this.setState({ id: this.state.DATA.tour.id });
+  };
+
   uploadImage = async () => {
     const task = storage()
       .ref(`/ImageTour/${this.state.tenTour}/`)
@@ -41,30 +58,27 @@ export default class DetailsScreen extends React.Component {
     }
     this.setState({
       photo: (
-        await storage().ref(`/ImageTour/${this.state.tenTour}`).getDownloadURL()
+        await storage()
+          .ref(`/ImageTour/${this.state.tenTour}`)
+          .getDownloadURL()
       ).toString(),
     });
   };
 
-  ThemTour = async () => {
-    const {tenTour, soLuongNguoi, giaTour, loTrinh, thoiGian, phuongTien, photo} = this.state;
-
+  _updateTour = async () => {
     if (
-      tenTour != '' &&
-      soLuongNguoi != '' &&
-      giaTour != '' &&
-      loTrinh != '' &&
-      thoiGian != '' &&
-      phuongTien != '' &&
-      photo != '' 
-     
+      this.state.tenTour != '' &&
+      this.state.soLuongNguoi != '' &&
+      this.state.giaTour != '' &&
+      this.state.loTrinh != '' &&
+      this.state.thoiGian != '' &&
+      this.state.phuongTien != '' &&
+      this.state.photo != ''
     ) {
       await this.uploadImage();
-
-      const ref = await database().ref('QuanLyTour/Tour/').push();
-      ref
-        .set({
-          id: ref.key,
+      await database()
+        .ref(`QuanLyTour/Tour/${this.state.id}`)
+        .update({
           tenTour: this.state.tenTour,
           soLuongNguoi: this.state.soLuongNguoi,
           giaTour: this.state.giaTour,
@@ -73,9 +87,9 @@ export default class DetailsScreen extends React.Component {
           phuongTien: this.state.phuongTien,
           photo: this.state.photo,
         })
-        .then(() => alert('Success'));
+        .then(() => alert('Cập nhật thành công!'));
     } else {
-      alert('Vui lòng nhập đầy đủ');
+      alert('Vui lòng nhập đủ!');
     }
   };
 
@@ -113,101 +127,56 @@ export default class DetailsScreen extends React.Component {
     });
   };
   render() {
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.centerView}>
-          <Text style={styles.tieude}>Thêm chuyến đi</Text>
+          <Text style={styles.tieude}>Thông tin chuyến đi</Text>
         </View>
         <View style={styles.view1}>
-          <Text> Tên chuyến đi : </Text>
+          <Text style={styles.textTen}> Tên chuyến đi : {this.state.tenTour}</Text>
         </View>
-        <View>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({tenTour: text})}
-          />
-        </View>
-        <View style={styles.view1}>
-          <Text> Số lượng hành khách : </Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({soLuongNguoi: text})}
-          />
-        </View>
-        <View style={styles.view1}>
-          <Text> Giá chuyến đi : </Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({giaTour: text})}
-          />
-        </View>
-        <View style={styles.view1}>
-          <Text> Lộ trình : </Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({loTrinh: text})}
-          />
-        </View>
-        <View style={styles.view1}>
-          <Text> Thời gian: </Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({thoiGian: text})}
-          />
-        </View>
-        <View style={styles.view1}>
-          <Text> Phương tiện : </Text>
-        </View>
-        <View>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({phuongTien: text})}
-          />
-        </View>
-        <View style={styles.view1}>
-          <Text> Chọn Ảnh : </Text>
-        </View>
-        <TouchableOpacity style={styles.view1} onPress={this.selectFile}>
-          <Image
-            source={require('./assets/camera.png')}
-            style={{width: 50, height: 50}}></Image>
-        </TouchableOpacity>
-        <View>
+        <View style = {styles.viewI}>
           {this.state.photo == '' ? (
-            <Image style={{marginHorizontal: 10}} />
+            <Image style={styles.image} />
           ) : (
-            <Image
-              source={{uri: this.state.photo}}
-              style={{marginHorizontal: 10, width: 200, height: 200}}
-            />
-          )}
+              <Image
+                source={{ uri: this.state.photo }}
+                style={styles.image}
+              />
+            )}
         </View>
-        <View>
-          <View style={styles.view3}>
-            {/* style={styles.button} onPress={ () => this.ThemPhong()} */}
-            <TouchableOpacity onPress = { () => this.ThemTour()} style = {styles.button}>
-              <Text>Thêm chuyến đi</Text>
-            </TouchableOpacity>
+        <View style={styles.view1}>
+          <Text style = {styles.text2}> Số lượng người :{this.state.soLuongNguoi} </Text>
+        </View>
+        <View style={styles.view1}>
+          <Text style = {styles.text2}> Giá chuyến đi : {this.state.giaTour}</Text>
+        </View>
+        <View style={styles.view1}>
+          <Text style = {styles.text2}> Lộ trình:{this.state.loTrinh} </Text>
+        </View>
+        <View style={styles.view1}>
+          <Text style = {styles.text2}> Thời gian : {this.state.thoiGian}</Text>
+        </View>
+        <View style={styles.view1}>
+          <Text style = {styles.text2}> Phương tiện:{this.state.phuongTien} </Text>
+        </View>
+        <View style = {styles.view3}>
+             <TouchableOpacity onPress = {()=> this.props.navigation.navigate("DanhSachHK")} style = {styles.button}>
+               <Text>Danh sách hành khách</Text></TouchableOpacity> 
           </View>
-        </View>
+
       </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#ff7f50'},
+  container: { flex: 1, backgroundColor: '#ff7f50' },
   view1: {
     justifyContent: 'center',
     alignItems: 'flex-start',
     marginHorizontal: 20,
+    marginVertical: 10,
   },
   view2: {
     justifyContent: 'center',
@@ -219,6 +188,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 20,
     marginHorizontal: 20,
+  },
+  viewI: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
+    marginHorizontal: 20,
+    borderRadius: 20,
   },
   centerView: {
     flexDirection: 'row',
@@ -241,11 +217,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15,
-    backgroundColor:'#d02860'
   },
   tieude: {
     fontSize: 30,
     marginVertical: 30,
     color: '#008000',
   },
+  textTen: {
+    fontSize: 22
+  },
+  text2:{
+    fontSize:18
+  },
+  image: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+    width: 200, height: 200
+  },
+  button: {
+    borderRadius: 20,
+    borderColor: '#000',
+    borderWidth: 1,
+    width: 150,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 15,
+    backgroundColor: '#d02860'
+  }
 });
