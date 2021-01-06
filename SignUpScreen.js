@@ -109,7 +109,7 @@ export default class SignUpScreen extends React.Component {
                             color="#05375a"
                             size={30} />
                         <TextInput
-                            placeholder="Confirm PassWord!"
+                            placeholder="Confirm PassWord!!!!!!!!!!!!!!!!!!!"
                             secureTextEntry={this.state.secureTextEntry ? true : false}
                             style={styles.textInput}
                             autoCapitalize="none"
